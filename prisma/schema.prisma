@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+model User{
+   id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String?
+  image String?
+  email String? @unique
+  verified  Boolean  @default(false)
+  emailVerified DateTime?
+  role String @default("User")
+  hashedPassword String?
+  verificationToken VerificationToken?
+  createAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+  ChatsIds String[] @db.ObjectId
+  Chats Chat[] @relation(fields: [ChatsIds], references: [id])
+  seenMessageIds String[] @db.ObjectId
+  seenMessages Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
+  Messages Message[]
+  BlockId String[] @db.ObjectId
+  Notifications Notification[]
+  sessions Session[]
+  accounts Account[]
+  // Blocked Users
+  blockedUsers Block[] @relation("Blocker")
+  blockedByUsers Block[] @relation("Blocked")
+ 
+}
+
+model Account{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  userId String @db.ObjectId
+  type String
+  provider String
+  providerAccountId String
+  refresh_token String? @db.String
+  access_token String? @db.String
+  expires_at Int?
+  token_type String?
+  scope String?
+  id_token String? @db.String
+  session_state String?
+user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+ @@unique([provider, providerAccountId])
+}
+model Session{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  sessionToken String @unique
+  userId String @db.ObjectId 
+  expires DateTime
+
+user User @relation(fields: [userId],references: [id],onDelete:Cascade)
+}
+
+model VerificationToken{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  identifier String @unique @db.ObjectId
+  token String @unique
+  user    User  @relation(fields: [identifier], references: [id], onDelete: Cascade)
+  expires DateTime
+  @@unique([identifier,token])
+}
+
+model Chat{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  createAt DateTime @default(now())
+  lastMessageAt DateTime @default(now())
+  name String?
+  isGroup Boolean? @default(false)
+  isPending Boolean? @default(true)
+  initiatorId  String   @db.ObjectId 
+  messagesIds String[] @db.ObjectId
+  messages Message[]
+  userIds String[] @db.ObjectId
+  hiddenForUserIds String[] @db.ObjectId
+
+  user User[]   @relation(fields: [userIds], references: [id])
+}
+
+model Message{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  content String?
+  image String?
+  isGif Boolean? @default(false) 
+  isVideo Boolean?
+  createAt DateTime @default(now())
+  seenIds String[] @db.ObjectId
+  seen User[] @relation("Seen",fields: [seenIds],references: [id])
+  ChatId String @db.ObjectId
+  chat Chat @relation(fields: [ChatId],references: [id], onDelete: Cascade)
+  senderId String @db.ObjectId
+  sender User @relation(fields: [senderId],references: [id],onDelete:Cascade)
+
+  
+}
+
+model Notification{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  description String?
+  type String? @default("welcome")
+  userId String @db.ObjectId
+  user User @relation(fields: [userId],references: [id],onDelete:Cascade)
+  createAt  DateTime @default(now())
+
+}
+
+model Block {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  blockerId String @db.ObjectId
+  blockedId String @db.ObjectId
+  createdAt DateTime @default(now())
+
+  blocker User @relation("Blocker", fields: [blockerId], references: [id])
+  blocked User @relation("Blocked", fields: [blockedId], references: [id])
+}
