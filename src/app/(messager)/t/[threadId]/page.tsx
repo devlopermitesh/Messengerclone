@@ -18,9 +18,10 @@ const Home = () => {
   const {data}=useGetContacts()
    const { threadId } = useParams<{ threadId: string }>();
   const {OtheruserProfileMenuOpen}=useMenuStore()
+ 
   return (
     <div className="flex flex-row w-full  px-4 gap-10 mt-5 h-full">  
-      <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white shadow-md rounded-lg mx-auto")}>
+      <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white shadow-md rounded-lg mx-auto hidden md:flex")}>
         <ChatList>
             <div className="font-bold text-2xl flex flex-row justify-between capitalize">
             <h1 className="ml-2">Chats</h1>
@@ -30,17 +31,19 @@ const Home = () => {
             />
             </div>
 <SearchBar/>
-<ChatContent activeChat={threadId} data={data?.data ?? null}/>
+<ChatContent  activeChat={threadId} data={data?.data ?? null}/>
+
         </ChatList>
       </div>
-      <div className={twMerge("flex-2  h-[calc(100%-1.25rem)] bg-white rounded-lg mx-auto hidden lg:flex")}>
+      {/* ${OtheruserProfileMenuOpen?'hidden md:flex':'flex'} */}
+      <div className={twMerge("flex-2  h-[calc(100%-1.25rem)] bg-white rounded-lg mx-auto  lg:flex",OtheruserProfileMenuOpen && "hidden md:flex")}>
         <ChatBox>
       <MessageContent data={data?.data??[]} activeId={threadId} />
         </ChatBox>
       </div>
       {
 OtheruserProfileMenuOpen &&
-(      <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white rounded-lg mx-auto hidden lg:flex transition delay-150 duration-300 ease-in-out")}>
+(      <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white rounded-lg mx-auto  lg:flex transition delay-150 duration-300 ease-in-out")}>
 <ChatBox>
 <ProfileDetails data={data?.data ??[]} />
 </ChatBox>

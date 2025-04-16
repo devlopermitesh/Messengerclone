@@ -14,7 +14,6 @@ const Message: React.FC<MessageProps> = ({ data, islast }) => {
   const session = useSession();
   const isOwn = data?.sender?.email === session.data?.user.email;
   const isSeen = data.seenIds?.some((userId) => userId !== session.data?.user?.id);
-console.log("Data",isSeen)
   const container = clsx(
     "flex w-full px-2 py-1 md:px-4 md:py-2 items-center group",
     isOwn ? "justify-end" : "justify-start"
@@ -61,11 +60,15 @@ console.log("Data",isSeen)
   };
   return (
     <div key={data.id} className={container}>
+ {isOwn && (
          <div className="flex justify-end gap-2 mt-2 text-xs opacity-0 group-hover:opacity-70 transition delay-150 duration-300 ease-in-out">
-          <Menu size={18} />
-          <Reply size={18} />
-          <Smile size={18} />
-        </div>
+
+   <Menu size={18} />
+   <Reply size={18} />
+   <Smile size={18} />
+   </div>
+ )
+ }      
       {!isOwn && (
         <div  className="flex flex-col items-center mr-2">
           <Image
@@ -89,7 +92,14 @@ console.log("Data",isSeen)
 />
 
       </div>
-
+      {!isOwn && (
+        <div className="flex justify-end gap-2 mt-2 text-xs opacity-0 group-hover:opacity-70 transition delay-150 duration-300 ease-in-out">
+   <Menu size={18} />
+   <Reply size={18} />
+   <Smile size={18} />
+   </div>
+ )
+ }  
     </div>
   );
 };

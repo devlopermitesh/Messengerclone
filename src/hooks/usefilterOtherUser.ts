@@ -1,20 +1,13 @@
 import { useEffect, useState } from "react";
-import { Message, User } from "@prisma/client";
+import { Chat, Message, User } from "@prisma/client";
 import { getSession } from "next-auth/react";
 
-export interface UserListProps {
-    isGroup: boolean;
-    id: string;
-    createAt: string;
-    lastMessageAt: string;
-    name: string | null;
+export interface ChatListProps extends Chat {
     messages: Message[];
-    messagesIds: string[];
-    userIds: string[];
     user: User[];
 }
 
-const useFilterOtherUser = ({ data }: { data: UserListProps |null }) => {
+const useFilterOtherUser = ({ data }: { data: ChatListProps |null }) => {
     const [otherUser, setOtherUser] = useState<User | null>(null);
     useEffect(() => {
         const fetchSession = async () => {

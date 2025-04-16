@@ -82,6 +82,8 @@ model Chat{
   lastMessageAt DateTime @default(now())
   name String?
   isGroup Boolean? @default(false)
+  Image String?
+  type String? @default("PUBLIC")
   isPending Boolean? @default(true)
   initiatorId  String   @db.ObjectId 
   messagesIds String[] @db.ObjectId

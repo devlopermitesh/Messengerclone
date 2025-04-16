@@ -13,7 +13,7 @@ interface FileUploadProps {
 }
 
 const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
-  ({ onSuccess, onProgress, fileType = "image" }, ref) => {
+  ({ onSuccess, onProgress, fileType = "image",...props }, ref) => {
 
     const onError = (err: { message: string }) => {
       console.log("Error", err);
@@ -105,6 +105,7 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
       <div className="space-y-2 w-0 h-0">
         
         <IKUpload
+
         ref={ref}
         fileName={fileNamePrefix[fileType]}
         onError={onError}
@@ -116,6 +117,7 @@ const FileUpload = forwardRef<HTMLInputElement, FileUploadProps>(
         validateFile={validateFile}
         useUniqueFileName={true}
         folder={uploadFolder[fileType]}
+        {...props} 
       />
       </div>
     );

@@ -6,9 +6,10 @@ import MessageContent from "@/components/Common/MessageContent";
 import SearchBar from "@/components/Common/Searchbar";
 import { Button } from "@/components/ui/button";
 import useGetRequest from "@/hooks/GetRequestchat";
+import useMenuStore from "@/hooks/uihooks/useMenustate";
 import { useNotificationStore } from "@/hooks/useNotificationStore";
 import { pusherclient } from "@/lib/pusher";
-import { MessageSquarePlus, Pencil } from "lucide-react";
+import { Columns2, MessageSquarePlus, PanelLeftClose, Pencil } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
@@ -17,6 +18,8 @@ const Home = () => {
   const session=useSession();
   const {data,isLoading,error,mutate}=useGetRequest()
   const notification=useNotificationStore();
+  const {dashboardMenuOpen:isDashboardopen,toggleDashboardMenu}=useMenuStore()
+ 
   useEffect(()=>{
   const Requestnotifications=notification.selectbyType("Request")
   Requestnotifications.forEach((requestnotification)=>{
@@ -55,7 +58,14 @@ pusherclient.unsubscribe(session.data.user.id ??"")
       <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white shadow-md rounded-lg mx-auto")}>
         <ChatList>
             <div className="font-bold text-2xl flex flex-row justify-between capitalize">
-            <h1 className="ml-2">Request</h1>
+            <span className="flex items-center px-2 ">
+              <Columns2 size={23} onClick={toggleDashboardMenu} className={`text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 lg:hidden  hover:bg-[#bcc0c4] rounded-full  ${(isDashboardopen)?"hidden":"inline"} `} />
+              
+              <PanelLeftClose
+                size={23} onClick={toggleDashboardMenu} className={`text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 lg:hidden  hover:bg-[#bcc0c4] rounded-full  ${(isDashboardopen)?"inline":"hidden"} `} />
+ <h1 className="ml-2">Request</h1>
+              </span>
+          
             </div>
             <div className="font-bold text-lg w-full  flex flex-row justify-between border rounded-full overflow-hidden mt-10 space-x-10 ">
             <div className="flex-1 hover:bg-gray-200 py-2 rounded-full border-t-none border-b-none bg-gray-100 cursor-pointer text-center text-zinc-500">you may know

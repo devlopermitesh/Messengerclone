@@ -1,7 +1,7 @@
 "use client"
 import Image from "next/image";
 import Nomessage from "@/assets/NoMessage.png"
-import useFilterOtherUser, { UserListProps } from "@/hooks/usefilterOtherUser";
+import useFilterOtherUser from "@/hooks/usefilterOtherUser";
 import ConversationItem from "./ConversationItem";
 import { usePathname, useRouter } from "next/navigation";
 
@@ -44,7 +44,7 @@ const ChatContent:React.FC<ChatContent>=({data,activeChat})=>{
     }
 return(
     <div className="flex flex-col gap-2 h-[calc(100%-1.25rem)] overflow-y-auto px-2 py-4">
-        {data && data.map((user:UserListProps)=>(<ConversationItem activeChat={activeChat} key={user?.id} user={user} onClick={handleclick} />))}
+        {data && data.map((user:any)=>(<ConversationItem activeChat={activeChat} key={user?.id} user={user} onClick={handleclick} />))}
     </div>
 )
 }

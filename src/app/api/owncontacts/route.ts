@@ -39,6 +39,7 @@ try {
       
     return NextResponse.json({ success: true, data: filteredContacts ?? [] }, { status: 200 });
 } catch (error) {
+    console.log(error)
     return NextResponse.json({ success: false, error: "Something went wrong! Please try again later." }, { status: 500 });
 }
 }

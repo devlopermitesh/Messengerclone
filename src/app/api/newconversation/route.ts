@@ -15,10 +15,12 @@ export async function POST(request: NextRequest) {
         }
 
         const body = await request.json();
-        const {userId,isGroup,title}=body
-        console.log("userId",userId)
+        const {userId,isGroup,title,type,Image}=body
+        console.log("userId",...userId.map((id:string)=>({id})))
         console.log("isGroup",isGroup)
         console.log("title",title)
+        console.log("type",type)
+        console.log("Image",Image)
         if(!userId){
             return NextResponse.json({ success: false, error: "User ID is required" }, { status: 400 });
         }
@@ -30,12 +32,14 @@ export async function POST(request: NextRequest) {
                 data:{
                     name:title,
                     isGroup:true,
+                    type:type,
+                    Image:Image,
                     initiatorId:currentUser.id,
                     user:{
-                        connect:{
+                        connect:[
                             ...userId.map((id:string)=>({id})),
-                        id:currentUser.id
-                        }
+                        {id:currentUser.id}
+                        ]
                     }
                 },
                 include:{

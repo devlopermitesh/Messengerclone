@@ -80,7 +80,7 @@ usePusherNotificationSync();
     
   return (
     <div className={twMerge(` flex h-full w-full `)}>
-        <div className={twMerge('relative md:flex flex-col  space-y  w-[80px] lg:w-[300px] p-2 ', isDashboardopen && "lg:w-[100px]  ")}>
+        <div className={twMerge('relative hidden md:flex flex-col  space-y   w-[80px] lg:w-[300px] p-2 ', isDashboardopen && "lg:w-[100px] flex")}>
         <Box className=''>
         <div className={twMerge(
   'flex flex-col gap-y-2', 

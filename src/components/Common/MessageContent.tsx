@@ -6,7 +6,7 @@ import DefaultProfile from "@/assets/default.png"
 import useFilterOtherUser from "@/hooks/usefilterOtherUser";
 import MessagerFooter from "./MessageFooter";
 import useCurrentChat from "@/hooks/usecurrentChat";
-import { Ellipsis, Phone, Video } from "lucide-react";
+import { Columns2, Ellipsis, PanelLeftClose, Phone, Video } from "lucide-react";
 import useThreadStore from "@/hooks/useThreadStore";
 import { useEffect, useMemo } from "react";
 import MessagesBox from "./MessagesBox";
@@ -23,6 +23,8 @@ const MessageContent:React.FC<MessageContent>=({activeId,data})=>{
   const session=useSession()
   const CurrentChat=useCurrentChat({data,activeId})
   const Otheruser=useFilterOtherUser({data:CurrentChat[0]})
+  const {dashboardMenuOpen:isDashboardopen,toggleDashboardMenu}=useMenuStore()
+  console.log("Current data",data)
   console.log("Current chat",CurrentChat)
   const setThreadId = useThreadStore((state) => state.setThreadId);
   const toggleProfile=useMenuStore((state)=>state.toggleOtheruserProfileMenuOpen)
@@ -52,13 +54,17 @@ if(activeId){
 
     }
 return(
-    <div className="flex flex-col h-full w-full">
+    <div className={`flex flex-col h-full w-full `}>
     <nav className="w-full h-15 flex flex-row shadow py-2 px-4 items-center gap-2">
+    <Columns2 size={23} onClick={toggleDashboardMenu} className={`text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 lg:hidden  hover:bg-[#bcc0c4] rounded-full  ${(isDashboardopen)?"hidden":"inline"} `} />
+              
+              <PanelLeftClose
+                size={23} onClick={toggleDashboardMenu} className={`text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 lg:hidden  hover:bg-[#bcc0c4] rounded-full  ${(isDashboardopen)?"inline":"hidden"} `} />
       <Avatar className='cursor-pointer w-12 h-12 lg:w-12 lg:h-12'>
-        <AvatarImage src={Otheruser?.image || undefined} alt="@shadcn" className="object-cover" />
+        <AvatarImage src={(CurrentChat[0]?.isGroup)?CurrentChat[0].Image ?? undefined:Otheruser?.image?? undefined } alt="@shadcn" className="object-cover" />
         <AvatarFallback>
           <Image 
-            src={Otheruser?.image || DefaultProfile} 
+            src={(CurrentChat[0]?.isGroup)?CurrentChat[0].Image ?? DefaultProfile:Otheruser?.image?? DefaultProfile } 
             alt="User Image" 
             height={100} 
             width={100} 
@@ -66,7 +72,9 @@ return(
           />
         </AvatarFallback>
       </Avatar> 
-      <h2 className="text-zinc-900 md:text-md lg:text-lg font-semibold">{Otheruser?.name}</h2>
+      <h2 className="text-zinc-900 md:text-md lg:text-lg font-semibold">
+        {(CurrentChat[0]?.isGroup)?CurrentChat[0].name ?? "Messenger Group":Otheruser?.name?? "Messenger user" }
+      </h2>
       <div className="flex flex-row items-center h-full ml-auto gap-3">
       <div className=" h-auto hover:bg-gray-400/30 rounded-full bg-transparent w-auto flex items-center justify-center ml-auto my-auto transition-all  delay-50 duration-100 ease-in-out">
       <Phone size={30} className='rounded-full px-2 bg-[#B24BF3] text-white text-center font-semibold cursor-pointer m-2'/>
