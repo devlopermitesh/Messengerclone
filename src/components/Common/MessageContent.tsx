@@ -125,7 +125,7 @@ return(
               </DropdownMenu>
 
     </MobileOnlyView>
-      <BrowserView className="flex flex-row items-center h-full ml-auto gap-3 border-2 border-green-500">
+      <BrowserView className="flex flex-row items-center h-full ml-auto gap-3 ">
 
     <div className=" h-auto hover:bg-gray-400/30 rounded-full bg-transparent w-auto flex items-center justify-center ml-auto my-auto transition-all  delay-50 duration-100 ease-in-out">
       <Phone size={30} className='rounded-full px-2 bg-[#B24BF3] text-white text-center font-semibold cursor-pointer m-2'/>
