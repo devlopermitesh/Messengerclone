@@ -2,7 +2,7 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
-export type User = {
+ type User = {
     image: string | null;
     name: string | null;
     id: string;
