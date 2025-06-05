@@ -67,7 +67,7 @@ else {
     return "receive";
 }
 
-},[lastMessage])
+},[lastMessage,userId])
 return (
     <div  ref={containerRef}   className={twMerge(`flex items-center bg-gray-100  truncate gap-3 p-2 hover:bg-gray-100 cursor-pointer py-3 rounded-lg group relative`,(activeChat ===user.id)?"bg-gray-100":"")} key={user?.id} onClick={()=> onClick(user?.id)}>
         <Avatar className='cursor-pointer w-12 h-12 lg:w-12 lg:h-12  '>

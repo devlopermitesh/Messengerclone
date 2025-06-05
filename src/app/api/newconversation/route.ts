@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb";
 import ServerAuth from "@/libserver/serverAuth";
 import { pusherserver } from "@/lib/pusher";
+import { User } from "../messages/route";
 
 
 
@@ -92,7 +93,7 @@ const newChat = await prismadb.chat.create({
 
 // Notify all users about the new Requested chat
 await Promise.all(
-    newChat.user.map((user) =>
+    newChat.user.map((user:User) =>
       pusherserver.trigger(user.email!, "notification:new:requestchat", newChat)
     )
   );
