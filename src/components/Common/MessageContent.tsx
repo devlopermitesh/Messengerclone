@@ -37,7 +37,7 @@ useEffect(()=>{
 if(activeId){
   setThreadId(activeId)
 }
-},[activeId])
+},[activeId,setThreadId])
   if (!data || data.length==0 ||CurrentChat?.length==0){
         return(
         <div className="w-full h-full py-10 flex flex-col  space-y-3 items-center justify-center">

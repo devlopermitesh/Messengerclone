@@ -138,5 +138,5 @@ toast.info(`${pushcustomnotification.title} — ${pushcustomnotification.message
       pusherclient.unbind('notification:new:requestchat', handleNewRequestNotification);
       pusherclient.unsubscribe(useremail);
     };
-  }, [session.data?.user?.id]);
+  }, [session.data?.user?.id,push,session.data?.user.email]);
 };

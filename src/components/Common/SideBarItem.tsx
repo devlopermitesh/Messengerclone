@@ -25,7 +25,7 @@ const SideBarItem: React.FC<SidebarIconProps> = ({ icon: Icon, label,active = fa
     setunread((unreadnotifications.length >0)?true:false);
     setNotiCount(count.length);
 
-  }, [notification.notifications.length, label]);
+  }, [notification,length, label]);
   return (
     <Link
       href={href}
