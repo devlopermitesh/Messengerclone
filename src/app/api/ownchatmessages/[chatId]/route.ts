@@ -1,9 +1,11 @@
 import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
+interface Context {
+  params: Promise<{ chatId: string }>
+}
 
-
-export async function GET(req: NextRequest, { params }: { params: { chatId: string } }) {
+export async function GET(req: NextRequest,context:Context) {
   try {
     // Authenticating the user
     const currentUser = await ServerAuth(req);
@@ -12,7 +14,10 @@ export async function GET(req: NextRequest, { params }: { params: { chatId: stri
     }
 
     // Extracting chatId from params
-    const { chatId } = params;
+    const { params } = context;
+    const resolvedParams = await params;
+    const { chatId } = resolvedParams;
+
 
     // Validate chatId
     if (!chatId) {
