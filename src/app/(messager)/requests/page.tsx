@@ -24,7 +24,7 @@ const Home = () => {
   Requestnotifications.forEach((requestnotification)=>{
     notification.update(requestnotification.id,{read:true})
   })
-  },[notification,session.data?.user.id])
+  },[session.data?.user.id])
 
   useEffect(()=>{
     if(!session.data?.user.id) return ;
