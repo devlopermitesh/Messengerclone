@@ -10,7 +10,7 @@ const ReadyGoMessagesBox=()=>{
     const {listusers,removeuser}=useConversationReady()
     const {isOpen,onClose,onOpen}=useGroupChatmodel()
     return(
-    <div className="flex flex-col h-full w-full relative  border-2 border-orange-500 mx-auto">
+    <div className="flex flex-col h-full w-full relative  mx-auto">
         <div className="mx-auto mt-10 lg:mt-14 flex flex-col border-2 border-green-500">
             {
                 (listusers.length==1)?(

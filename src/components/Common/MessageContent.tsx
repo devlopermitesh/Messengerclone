@@ -54,7 +54,7 @@ if(activeId){
 
     }
 return(
-    <div className={`flex flex-col h-full w-full border-2 border-green-500 `}>
+    <div className={`flex flex-col h-full w-full  `}>
     <nav className="w-full h-15 flex flex-row shadow py-2 md:px-1 md:px-4 items-center gap-2">
     <Columns2 size={23} onClick={toggleDashboardMenu} className={`text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 bg-orange-500 lg:hidden  hover:bg-[#bcc0c4] rounded-full  ${(isDashboardopen)?"hidden":"inline"} `} />
               
@@ -72,7 +72,7 @@ return(
           />
         </AvatarFallback>
       </Avatar> 
-      <h2 className="text-md text-zinc-900 md:text-md lg:text-lg font-semibold border-2 border-orange-500 text-wrap">
+      <h2 className="text-md text-zinc-900 md:text-md lg:text-lg font-semibold  text-wrap">
         {(CurrentChat[0]?.isGroup)?CurrentChat[0].name ?? "Messenger Group":Otheruser?.name?? "Messenger user" }
       </h2>
 

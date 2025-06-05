@@ -18,7 +18,7 @@ const Home = () => {
   const {OtheruserProfileMenuOpen}=useMenuStore()
  
   return (
-    <div className="flex flex-row w-full  md:px-4 md:gap-10 md:mt-5 h-full border-2 border-orange-500">  
+    <div className="flex flex-row w-full  md:px-4 md:gap-10 md:mt-5 h-full">  
     {/* left window view in desktpop only  */}
       <div className={twMerge("flex-1 w-full  h-[calc(100%-1.25rem)] bg-white shadow-md rounded-lg mx-auto hidden md:flex ")}>
         <ChatList>
