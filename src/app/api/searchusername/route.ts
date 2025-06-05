@@ -47,9 +47,9 @@ export  async function GET(req: NextRequest) {
 
     // Fetch users whose names start with the given username
     const users = await prismadb.user.findMany({
-      where: { name: { startsWith: username } },
+      where: { name: { startsWith: username , mode: 'insensitive'  } },
     });
-
+console.log(users,username, "users found with the given username");
     return NextResponse.json({ success: true, data: users ?? [] }, { status: 200 });
   } catch (error) {
     console.error("Error fetching users:", error);

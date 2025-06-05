@@ -5,6 +5,8 @@ import { CheckCheck, Menu, Reply, Smile } from "lucide-react";
 import Image from "next/image";
 import clsx from "clsx";
 import DefaultProfile from "@/assets/default.png"
+import useMessageReplyState from "@/hooks/uihooks/useReplyMessage";
+import { twMerge } from "tailwind-merge";
 interface MessageProps {
   data: IMessageWithSenderAndSeen;
   islast: boolean;
@@ -12,6 +14,7 @@ interface MessageProps {
 
 const Message: React.FC<MessageProps> = ({ data, islast }) => {
   const session = useSession();
+  const {isReply,removeReplyState,setReplyState}=useMessageReplyState();
   const isOwn = data?.sender?.email === session.data?.user.email;
   const isSeen = data.seenIds?.some((userId) => userId !== session.data?.user?.id);
   const container = clsx(
@@ -24,9 +27,11 @@ const Message: React.FC<MessageProps> = ({ data, islast }) => {
     isOwn ? "bg-gradient-to-br from-purple-500 to-pink-500 text-white" : "bg-gray-100 dark:bg-zinc-800 text-black dark:text-white"
   );
 
-  const mediaStyles = "rounded-xl object-cover max-w-full max-h-80";
+  const mediaStyles = "rounded-xl object-cover max-w-full max-h-80 w-full h-auto";
 
-  const Content = ({ data }: { data: IMessageWithSenderAndSeen }) => {
+  const Content = ({ data }: { data: IMessageWithSenderAndSeen|null }) => {
+    if (!data) return null;
+    console.log("Data in content", data);
     if (data.isGif && data?.isVideo) {
       return <img src={data?.image ?? ""} className={mediaStyles} alt="GIF" />;
     } else if (data.isVideo) {
@@ -58,19 +63,23 @@ const Message: React.FC<MessageProps> = ({ data, islast }) => {
     }
     return null;
   };
+  const handleReply = ()=>{
+    setReplyState(true, data.id,(isOwn?"Replying to yourself":`Replying to ${data.sender?.name}`),data.content ?`${data.content}`:"Media");
+   }
+    
   return (
     <div key={data.id} className={container}>
  {isOwn && (
          <div className="flex justify-end gap-2 mt-2 text-xs opacity-0 group-hover:opacity-70 transition delay-150 duration-300 ease-in-out">
 
    <Menu size={18} />
-   <Reply size={18} />
+   <Reply size={18} onClick={handleReply}/>
    <Smile size={18} />
    </div>
  )
  }      
       {!isOwn && (
-        <div  className="flex flex-col items-center mr-2">
+        <div  className="flex flex-col items-center mr-2 text-wrap">
           <Image
             src={data.sender?.image ?? DefaultProfile}
             alt={data.sender?.name ?? "User"}
@@ -80,8 +89,17 @@ const Message: React.FC<MessageProps> = ({ data, islast }) => {
           />
         </div>
       )}
+<div className="flex flex-col ">
+{
+  (data.replyToMessageId && data.replyToMessage) && (
 
-      <div  className={bubble}>
+<div className={twMerge(bubble, 'opacity-50   z-10')}>
+ <Content data={data.replyToMessage} />
+</div>
+  )
+}
+
+      <div  className={twMerge(bubble,"z-50")}>
      
         <Content data={data} />
         <CheckCheck
@@ -95,13 +113,17 @@ const Message: React.FC<MessageProps> = ({ data, islast }) => {
       {!isOwn && (
         <div className="flex justify-end gap-2 mt-2 text-xs opacity-0 group-hover:opacity-70 transition delay-150 duration-300 ease-in-out">
    <Menu size={18} />
-   <Reply size={18} />
+   <Reply size={18} onClick={handleReply} />
    <Smile size={18} />
    </div>
  )
  }  
     </div>
+</div>
+
   );
+
+
 };
 
 export default Message;

@@ -2,43 +2,76 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
+import { Message } from "@prisma/client";
 export async function POST(req:NextRequest){
 try {
     
  const body=await req.json();
- const {message,image,isVideo,isGif,activeId}=body;
+ const {message,image,isVideo,isGif,activeId,isReply,replyToMessageId}=body;
     const currentUser = await ServerAuth(req);
     if (!currentUser || typeof currentUser !== "object" || !("id" in currentUser) || !activeId) {
         return NextResponse.json({ success: false, error: "Unauthorized request! Please try again later." }, { status: 401 });
     }
-const newMessage=await prismadb.message.create({
-    data:{
-        content:message,
-        image:image,
-        isVideo:isVideo,
-        isGif:isGif,
-        sender:{
-            connect:{
-                id:currentUser.id
-            }
-        },
-        chat:{
-            connect:{
-                id:activeId
-            }
-        },
-        seen:{
-            connect:{
-                id:currentUser.id
-            }
-        },
+// const newMessage=await prismadb.message.create({
+//     data:{
+//         content:message,
+//         image:image,
+//         isVideo:isVideo,
+//         isGif:isGif,
+
+//         sender:{
+//             connect:{
+//                 id:currentUser.id
+//             }
+//         },
+//         chat:{
+//             connect:{
+//                 id:activeId
+//             }
+//         },
+//         seen:{
+//             connect:{
+//                 id:currentUser.id
+//             }
+//         },
         
-    },
-    include:{
-            seen:true,
-            sender:true
+//     },
+//     include:{
+//             seen:true,
+//             sender:true
+//     }
+// })
+    const messageData :any= {
+      content: message,
+      image: image,
+      isVideo: isVideo,
+      isGif: isGif,
+      sender: {
+        connect: { id: currentUser.id },
+      },
+      chat: {
+        connect: { id: activeId },
+      },
+      seen: {
+        connect: { id: currentUser.id },
+      },
+    };
+    
+    // If it's a reply, include the reference
+    if (isReply && replyToMessageId) {
+      messageData.replyToMessage= {
+        connect: { id: replyToMessageId },
+      };
     }
-})
+
+    const newMessage = await prismadb.message.create({
+      data: messageData,
+      include: {
+        seen: true,
+        sender: true,
+        replyToMessage:true
+      },
+    });
 
 const updatechat=await prismadb.chat.update({
     where:{
@@ -74,6 +107,7 @@ await Promise.all(
 return NextResponse.json({success:true,data:newMessage},{status:200}) 
 
 } catch (error) {
+  console.log(error);
     return NextResponse.json({success:false,error:"Something went wromg"},{status:500}) 
 }
 }

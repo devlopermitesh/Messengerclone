@@ -1,19 +1,22 @@
-import React from "react";
+import React, { Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import useSearchGif from "@/hooks/useSearchGif";
 import { toast } from "sonner";
 import axios from "axios";
 import useCurrentChat from "@/hooks/usecurrentChat";
 import useThreadStore from "@/hooks/useThreadStore";
+import useMenuStore from "@/hooks/uihooks/useMenustate";
 
 interface GifGridProps {
   searchTerm?: string;
+  setSearchTerm:Dispatch<SetStateAction<string>>;
 }
 
-const GifGrid: React.FC<GifGridProps> = ({ searchTerm = "" }) => {
+const GifGrid: React.FC<GifGridProps> = ({ searchTerm = "" ,setSearchTerm}) => {
   const activeId=useThreadStore((state)=>state.threadId)
     const finalQuery = searchTerm.trim() === "" ? "Random" : searchTerm;
   const { gifs, isLoading, isError } = useSearchGif(finalQuery);
+  const {closeGifMenu}=useMenuStore()
 
   if (isLoading) {
     return <div>Loading GIFs...</div>;
@@ -42,6 +45,9 @@ try {
   console.log(error)
   toast.error("Ops! this Gif Can't send!")
 
+}finally{
+ setSearchTerm('') 
+closeGifMenu()
 }
   }
   return (

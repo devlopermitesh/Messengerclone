@@ -4,6 +4,7 @@ import React, { useEffect } from 'react'
 import RestrictedListProvider from './RestrictedlistProvider'
 import DeleteChatProvider from './DeleteChatProvider'
 import GroupChatProvider from './GroupchatProvider'
+import ProfileSettingProvider from './ProfileSettingProvider'
 
 const ModalProvider = () => {
     const [isMounted,setIsMounted]=React.useState(true)
@@ -15,6 +16,7 @@ useEffect(()=>setIsMounted(true),[])
   <RestrictedListProvider/>
   <DeleteChatProvider/>
   <GroupChatProvider/>
+  <ProfileSettingProvider/>
        </>
   )
 }

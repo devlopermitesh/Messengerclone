@@ -7,6 +7,14 @@ export type IMessageWithSenderAndSeen = Prisma.MessageGetPayload<{
   include: {
     sender: true;
     seen: true;
+    replyToMessage:true;
+    // replyToMessage: {
+    //   include: {
+    //     sender: true;
+    //     seen: true;
+    //     replyToMessage:true;
+    //   };
+    // };
   };
 }>;
 

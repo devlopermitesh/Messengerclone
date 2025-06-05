@@ -7,6 +7,7 @@ import {
     DialogTitle,
   } from "@/components/ui/dialog";
   import React from "react";
+import { twMerge } from "tailwind-merge";
   
   interface ModalProps {
     isopen: boolean;
@@ -14,6 +15,7 @@ import {
     title: string;
     description?: string;
     children: React.ReactNode;
+    size?: string;
     footer?: React.ReactNode;
   }
   
@@ -23,12 +25,13 @@ import {
     title,
     description,
     children,
+    size,
     footer
   }) => {
     return (
       <Dialog open={isopen} onOpenChange={onchange} >
      
-        <DialogContent className="sm:max-w-[425px] bg-white">
+        <DialogContent className={twMerge("sm:max-w-[425px] bg-white",size)}>
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             {description && <DialogDescription>{description}</DialogDescription>}

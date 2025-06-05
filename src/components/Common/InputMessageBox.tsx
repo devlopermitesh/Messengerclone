@@ -115,7 +115,6 @@ const InputMessageBox: React.FC<InputMessageBoxProps> = ({form,Files,setFiles,na
     </FormItem>
   )}
 />
-<Smile className="w-auto h-3/4 aspect:square bg-sky-500 hover:bg-sky-600 rounded-full relative right-1 border-gray-400 text-white"/>
     </div>
     </div>
     )

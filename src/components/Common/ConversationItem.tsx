@@ -73,7 +73,7 @@ else {
 
 },[lastMessage])
 return (
-    <div  ref={containerRef}   className={twMerge(`flex items-center gap-3 p-2 hover:bg-gray-100 cursor-pointer py-3 rounded-lg group relative`,(activeChat ===user.id)?"bg-gray-100":"")} key={user?.id} onClick={()=> onClick(user?.id)}>
+    <div  ref={containerRef}   className={twMerge(`flex items-center bg-gray-100  truncate gap-3 p-2 hover:bg-gray-100 cursor-pointer py-3 rounded-lg group relative`,(activeChat ===user.id)?"bg-gray-100":"")} key={user?.id} onClick={()=> onClick(user?.id)}>
         <Avatar className='cursor-pointer w-12 h-12 lg:w-12 lg:h-12  '>
   <AvatarImage src={user.isGroup?user.Image ?? undefined:otheruser?.image ?? undefined} alt="@shadcn" className="object-cover" />
   <AvatarFallback>
@@ -86,11 +86,11 @@ return (
   className="w-full h-full object-cover" 
 /></AvatarFallback>
 </Avatar>
-<div className="flex flex-col gap-1  w-full">
+<div className="flex flex-col gap-1  w-full ">
 <h2 className="text-zinc-900 md:text-md lg:text-lg">{user.isGroup?user.name ?? 'Messenger user':otheruser?.name ?? "Messenger user"}</h2>
-<div className="flex flex-row relative  gap-2">
+<div className="flex flex-row relative  gap-2 truncate">
 <small className={`text-gray-500 text-sm ${hasSeen?"font-medium":"font-bold"}`}>{typeLastMessage}: {LastMessageText}</small>
-<small className="text-gray-500 text-sm group-hover:hidden">{RelativeTime(String(user.lastMessageAt))}</small>
+<small className="text-xs mt-auto text-gray-500 sm:text-sm group-hover:hidden">{RelativeTime(String(user.lastMessageAt))}</small>
 </div>
 </div>
 <div className="flex h-full hidden group-hover:inline items-center justify-center w-auto text-gray-500 float-right mr-10 transition-all duration-200 ease-out transform group-hover:-translate-y-1 relative">

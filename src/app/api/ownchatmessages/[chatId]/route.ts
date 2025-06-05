@@ -17,7 +17,8 @@ ChatId:chatId
 },
 include:{
  seen:true,
- sender:true   
+ sender:true,
+ replyToMessage:true,
 },
 orderBy:{
     createAt:"asc"

@@ -9,7 +9,7 @@ import useGetBlocklist from "@/hooks/GetBlocklist";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import Image from "next/image";
 import DefaultProfile from "@/assets/default.png"
-import useFilterOtherUser, { UserListProps } from "@/hooks/usefilterOtherUser";
+import useFilterOtherUser  from "@/hooks/usefilterOtherUser";
 import { twMerge } from "tailwind-merge";
 import axios from "axios";
 import { toast } from "sonner";
@@ -29,7 +29,7 @@ const updateblocklist=(newUpdate: {
   chatId:string,
   hidden: boolean
 })=>{
-mutate((prev:{data:UserListProps[]})=>{
+mutate((prev:{data:any[]})=>{
   const lists=prev.data
   return {
     ...prev,

@@ -4,12 +4,14 @@ import Nomessage from "@/assets/NoMessage.png"
 import useFilterOtherUser from "@/hooks/usefilterOtherUser";
 import ConversationItem from "./ConversationItem";
 import { usePathname, useRouter } from "next/navigation";
+import { Skeleton } from "../ui/skeleton";
 
 interface ChatContent{
 data:any ,
+isLoading?:boolean,
 activeChat?:string
 }
-const ChatContent:React.FC<ChatContent>=({data,activeChat})=>{
+const ChatContent:React.FC<ChatContent>=({data,isLoading,activeChat})=>{
   const router=useRouter()
   
   const pathname = usePathname();
@@ -24,8 +26,20 @@ const ChatContent:React.FC<ChatContent>=({data,activeChat})=>{
         ? `/t/${id}`
         : `${pathname}/t/${id}`;
   
-    router.replace(pushPath);
+    router.push(pushPath);
   };
+  
+    if(isLoading){
+   return ( <div className="flex flex-col gap-2 h-[calc(100%-1.25rem)] overflow-y-auto px-2 py-4">
+        {Array.from({length:7}).map((item,index)=>(<div key={index} className="flex items-center space-x-4">
+      <Skeleton className="h-12 w-12 rounded-full" />
+      <div className="space-y-2">
+        <Skeleton className="h-4 w-[250px]" />
+        <Skeleton className="h-4 w-[200px]" />
+      </div>
+    </div>))}
+    </div>)   
+    }
     if (!data || data?.length<0){
         return(
         <div className="w-full h-auto py-10 flex flex-col  space-y-3 items-center justify-center">

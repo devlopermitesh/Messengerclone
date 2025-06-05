@@ -7,7 +7,7 @@ import Taglist from "@/components/Taglist";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import useConversationReady from "@/hooks/useConversationReady";
 import axios from "axios";
-import { MessageSquarePlus, Users, X } from "lucide-react";
+import { Columns2, MessageSquarePlus, PanelLeftClose, Users, X } from "lucide-react";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { toast } from "sonner";
@@ -20,12 +20,14 @@ import useGetContacts from "@/hooks/useGetContacts";
 import ChatContent from "@/components/Common/ChatContent";
 import { useGroupChatmodel } from "@/hooks/uihooks/useGroupChatmodel";
 import IconButton from "@/components/Common/IconButton";
+import useMenuStore from "@/hooks/uihooks/useMenustate";
 const Home = () => {
     const [username, setUsername] = useState("");
     const [userlists,setuserlist]=useState([]);
     const [title,setTitle]=useState("")
-  const {data}=useGetContacts()
+  const {data,isLoading}=useGetContacts()
 
+  const { dashboardMenuOpen: isDashboardopen, toggleDashboardMenu } = useMenuStore();
   const [isUsernameSearch, setIsUsernameSearch] = useState(false);
   const {listusers,removeuser}=useConversationReady()
   const [ContactShow,setContactShow]=useState(true)
@@ -107,8 +109,8 @@ else{
 }
 
   return (
-    <div className="flex flex-row w-full  px-4 gap-10 mt-5 h-full">  
-      <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white shadow-md rounded-lg mx-auto")}>
+    <div className="flex flex-row w-full relative  px-4 gap-10 h-full">  
+      <div className={twMerge("flex-1  h-[calc(100%-1.25rem)] bg-white shadow-md rounded-lg mx-auto hidden lg:flex")}>
         <ChatList className="space-y-2" >
             <div className="font-bold text-2xl flex flex-row justify-between capitalize">
             <h1 className="ml-2">Chats</h1>
@@ -133,7 +135,7 @@ else{
           </span>
             
             </div>
-<SearchBar/>
+<SearchBar isloading={isLoading}/>
 {listusers && listusers.map((user)=><div key={user.id} className="flex flex-row bg-gray-500/10 w-[95%] mx-auto  hover:bg-gray-400/20 rounded-lg  items-center gap-3 px-2 py-4 cursor-pointer group/item " onClick={handleNewConversation}>
   <Avatar className='cursor-pointer w-12 h-12 lg:w-12 lg:h-12  '>
   <AvatarImage src={user?.image ?? undefined} alt="@shadcn" className="object-cover" />
@@ -154,20 +156,36 @@ else{
 <ChatContent data={data?.data?? []}/>
         </ChatList>
       </div>
-      <div className={twMerge("flex-2  h-[calc(100%-1.25rem)] bg-white rounded-xl overflow-hidden mx-auto hidden lg:flex")}>
+      <div className={twMerge("flex-2  h-[calc(100%-1.25rem)] bg-white rounded-xl overflow-hidden mx-auto  flex")}>
         <ChatBox>
             <div className="flex flex-row w-full h-17 py-2 items-center border px-2">
+    <span className="lg:hidden">
+        {isDashboardopen ? (
+              <PanelLeftClose
+                size={23}
+                onClick={toggleDashboardMenu}
+                className="text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 lg:hidden hover:bg-[#bcc0c4] rounded-full "
+              />
+              ) : (
+              <Columns2
+                size={23}
+                onClick={toggleDashboardMenu}
+                className="text-zinc-900 cursor-pointer mr-2 w-10 h-10 p-2 lg:hidden hover:bg-[#bcc0c4] rounded-full"
+              />
+              )}
+    </span>
                 <h1 className="text-lg ">To:</h1>       
+                                      
 <Taglist tags={listusers.map(user => ({ id: user.id, text: user.name || "Unknown" }))} />
                 <input 
                  size={30} 
-                 className="flex-2 border-none focus-visible:ring-0 focus:ring-0 focus:outline-none shadow-none text-xl"  
+                 className="flex-2 border-none focus-visible:ring-0 focus:ring-0 focus:outline-none shadow-none text md:text-xl"  
                  onChange={(e) =>debouncedUsername(e.target.value)} 
                    />
 
             </div>
          {
-            ContactShow && (<div ref={contactSearchRef} className="relative w-1/2 h-3/4">
+            ContactShow && (<div ref={contactSearchRef} className="relative  h-3/4">
                 <ContactSearch users={userlists}/>
                 </div>)
          }   
