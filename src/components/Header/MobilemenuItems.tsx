@@ -19,7 +19,7 @@ const MobilemenuItems: React.FC<MobilemenuItemsProps> = ({ visible }) => {
       <div className="flex flex-col text-2xl">
         {/* Features with Chevron */}
         <div className="flex flex-row justify-between items-center py-4 px-4 border-t border-b border-border/50" onClick={toggleFeatureMenu}>
-          <NavMenuItem Label="Features" className="font-normal text-primary" />
+          <NavMenuItem href='/' Label="Features" className="font-normal text-primary" />
           <ChevronDown
             className="relative h-8 w-8 text-primary transition duration-200"
           />
@@ -32,14 +32,17 @@ const MobilemenuItems: React.FC<MobilemenuItemsProps> = ({ visible }) => {
 
         {/* Other Menu Items */}
         <NavMenuItem
+        href='/'
           Label="Privacy and safety"
           className="font-normal text-primary py-4 px-4 border-t border-b border-border/50  justify-start"
         />
         <NavMenuItem
+        href='/'
           Label="Mobile App"
           className="font-normal text-primary py-4 px-4 border-t border-b border-border/50 justify-start"
         />
         <NavMenuItem
+        href='/'
           Label="Help Center"
           className="font-normal text-primary py-4 px-4 border-t border-b border-border/50 justify-start"
         />

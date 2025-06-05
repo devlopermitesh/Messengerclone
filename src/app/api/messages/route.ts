@@ -2,6 +2,7 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
+import { User } from "@prisma/client";
 export async function POST(req:NextRequest){
 try {
     
@@ -11,35 +12,7 @@ try {
     if (!currentUser || typeof currentUser !== "object" || !("id" in currentUser) || !activeId) {
         return NextResponse.json({ success: false, error: "Unauthorized request! Please try again later." }, { status: 401 });
     }
-// const newMessage=await prismadb.message.create({
-//     data:{
-//         content:message,
-//         image:image,
-//         isVideo:isVideo,
-//         isGif:isGif,
-
-//         sender:{
-//             connect:{
-//                 id:currentUser.id
-//             }
-//         },
-//         chat:{
-//             connect:{
-//                 id:activeId
-//             }
-//         },
-//         seen:{
-//             connect:{
-//                 id:currentUser.id
-//             }
-//         },
-        
-//     },
-//     include:{
-//             seen:true,
-//             sender:true
-//     }
-// })
+    
     const messageData :any= {
       content: message,
       image: image,
@@ -93,13 +66,12 @@ const updatechat=await prismadb.chat.update({
         }
     }
 })
-console.log("newMessag",newMessage)
 await pusherserver.trigger(activeId,"new:Message",newMessage)
 const lastMessage=updatechat.messages[updatechat.messages.length-1];
 
 // Notify all users about the chat update
 await Promise.all(
-  updatechat.user.map((user) =>
+  updatechat.user.map((user:User) =>
     pusherserver.trigger(user.email!, "chat:update", lastMessage)
   )
 );
