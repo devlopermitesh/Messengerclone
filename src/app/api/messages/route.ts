@@ -2,7 +2,21 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
-import { User } from "@prisma/client";
+type User = {
+    image: string | null;
+    name: string | null;
+    id: string;
+    email: string | null;
+    verified: boolean;
+    emailVerified: Date | null;
+    role: string;
+    hashedPassword: string | null;
+    createAt: Date;
+    updateAt: Date;
+    ChatsIds: string[];
+    seenMessageIds: string[];
+    BlockId: string[];
+}
 export async function POST(req:NextRequest){
 try {
     
