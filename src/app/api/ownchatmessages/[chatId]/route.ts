@@ -1,14 +1,15 @@
 import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
-export async function GET(req:NextRequest,  context: { params: { chatId: string } }){
+
+export async function GET(req: NextRequest, { params }: { params: { chatId: string } }) {
 try {
  const currentUser=await ServerAuth(req);
  if (!currentUser || typeof currentUser !== "object" || !("id" in currentUser)) {
     return NextResponse.json({ success: false, error: "Unauthorized request! Please try again later." }, { status: 401 });
 }
 
-const { chatId } = (await context.params);
+const { chatId } = await params;
 if(!chatId){
     return NextResponse.json({success:false,error:"ChatId is required"},{status:400})
 }
