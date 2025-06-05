@@ -4,7 +4,7 @@ import LogoComponent from "@/components/Header/Logo";
 import Resetpassword from "@/components/Form/ResetPassword";
 import { Suspense } from "react";
 
-const VerifyPage = () => {
+const ResetPassword = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <div className="flex flex-col justify-center items-center w-full h-screen space-y-5">
@@ -18,4 +18,4 @@ const VerifyPage = () => {
   );
 };
 
-export default VerifyPage;
+export default ResetPassword;
