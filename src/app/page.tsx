@@ -1,5 +1,4 @@
 import Footer from "@/components/Footer/Footer";
-import FeaturesMenu from "@/components/Header/FeaturesMenu";
 import Navbar from "@/components/Header/navbar";
 import InfroComp from "@/components/IntroCompont";
 

@@ -1,4 +1,4 @@
-import { Cog, FileVideo, Image, ImagePlay, Mic, Plus } from "lucide-react"
+import { FileVideo, Image, ImagePlay, Mic, Plus } from "lucide-react"
 import IconButton from "./IconButton"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import useMenuStore from "@/hooks/uihooks/useMenustate"

@@ -1,9 +1,7 @@
 import React, { Dispatch, SetStateAction } from "react";
-import Image from "next/image";
 import useSearchGif from "@/hooks/useSearchGif";
 import { toast } from "sonner";
 import axios from "axios";
-import useCurrentChat from "@/hooks/usecurrentChat";
 import useThreadStore from "@/hooks/useThreadStore";
 import useMenuStore from "@/hooks/uihooks/useMenustate";
 

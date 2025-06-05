@@ -92,7 +92,7 @@ const handleunBlock=async(activeId?:string)=>{
         description="you can unblock this user by click unblock ! start conversation."
       >
        <div className="w-full h-full bg-white text-black">
-<SearchBar/>
+<SearchBar isloading={isLoading}/>
 {
   blocklist && blocklist.map((list)=>{
     return (

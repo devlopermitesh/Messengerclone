@@ -1,18 +1,17 @@
 "use client"
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useMemo, useState } from 'react'
+import React, {  useMemo} from 'react'
 import Box from './Box';
 import { Columns2, Globe, MessageCircle, WandSparkles } from 'lucide-react';
 import { MessageCircleMore } from 'lucide-react';
 import { Archive } from 'lucide-react';
-import { Users } from 'lucide-react';
 import { Store } from 'lucide-react';
 import SideBarItem from './SideBarItem';
 // import { useUser } from '@/hook/useUser';
 import { twMerge } from 'tailwind-merge';
 import useMenuStore from '@/hooks/uihooks/useMenustate';
 import ProfileMenu from './ProfileAvatar';
-import { useNotificationStore, usePusherNotificationSync } from '@/hooks/useNotificationStore';
+import {  usePusherNotificationSync } from '@/hooks/useNotificationStore';
 import useCurrentUser from '@/hooks/useCurrentUser';
 interface SidebarProps{
     children: React.ReactNode,

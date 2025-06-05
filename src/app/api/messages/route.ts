@@ -2,7 +2,6 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
-import { Message } from "@prisma/client";
 export async function POST(req:NextRequest){
 try {
     

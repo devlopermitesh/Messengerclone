@@ -7,7 +7,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 import bcryptpass from "@/Helpers/bcryptpass";
 import prismadb from "@/libserver/prismadb";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import cryptoUtils from "@/Helpers/cryptoUtils";
 
 
 export const Authoptions:NextAuthOptions={

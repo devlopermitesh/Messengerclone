@@ -1,9 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { useSearchParams } from "next/navigation";
 import LogoComponent from "@/components/Header/Logo";
-import { toast } from "sonner";
 import Resetpassword from "@/components/Form/ResetPassword";
 
 const VerifyPage = () => {

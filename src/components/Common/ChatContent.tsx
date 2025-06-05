@@ -1,7 +1,6 @@
 "use client"
 import Image from "next/image";
 import Nomessage from "@/assets/NoMessage.png"
-import useFilterOtherUser from "@/hooks/usefilterOtherUser";
 import ConversationItem from "./ConversationItem";
 import { usePathname, useRouter } from "next/navigation";
 import { Skeleton } from "../ui/skeleton";

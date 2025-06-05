@@ -1,7 +1,6 @@
 import fetcher from "@/libserver/fetcher";
 import { Chat } from "@prisma/client";
 import useSWR from "swr";
-import { UserListProps } from "./usefilterOtherUser";
 
 const useGetBlocklist=()=>{
     const {data,isLoading,error,mutate}=useSWR('/api/blockchatlist',fetcher,{
@@ -14,7 +13,7 @@ const useGetBlocklist=()=>{
         errorRetryCount:1,
         errorRetryInterval:5000,
     })
-    return {data,isLoading,mutate,error} as {data:{data:UserListProps[]},isLoading:boolean,error:any,mutate:any}
+    return {data,isLoading,mutate,error} as {data:{data:any[]},isLoading:boolean,error:any,mutate:any}
 }
 
 export default useGetBlocklist

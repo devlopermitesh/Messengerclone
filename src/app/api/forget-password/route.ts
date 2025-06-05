@@ -40,7 +40,7 @@ export async function POST(request: Request) {
         );
         return NextResponse.json({success:true,message: "If an account exists, a password reset link has been sent." },{status:200});
 
-    } catch (error) {
+    } catch  {
         return NextResponse.json({ error: 'Something went wrong' }, { status: 500 });
     }
 }

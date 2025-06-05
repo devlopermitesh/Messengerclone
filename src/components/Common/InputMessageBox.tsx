@@ -1,6 +1,5 @@
-import { ImagePlus, Smile, X } from "lucide-react"
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import Image from "next/image";
+import { ImagePlus, X } from "lucide-react"
+import { FormControl, FormField, FormItem,  FormMessage } from "../ui/form";
 import { twMerge } from "tailwind-merge";
 import { Skeleton } from "../ui/skeleton";
 import IconButton from "./IconButton";

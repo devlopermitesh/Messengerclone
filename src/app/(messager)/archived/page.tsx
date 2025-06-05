@@ -2,8 +2,6 @@ import ChatBox from "@/components/Common/chatBox";
 import ChatContent from "@/components/Common/ChatContent";
 import ChatList from "@/components/Common/chatlistbox";
 import MessageContent from "@/components/Common/MessageContent";
-import SearchBar from "@/components/Common/Searchbar";
-import { MessageSquarePlus, Pencil } from "lucide-react";
 import { twMerge } from "tailwind-merge";
 
 const Home = () => {

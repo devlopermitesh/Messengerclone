@@ -7,10 +7,8 @@ import ProfileDetails from "@/components/Common/ProfileDetail";
 import SearchBar from "@/components/Common/Searchbar";
 import useMenuStore from "@/hooks/uihooks/useMenustate";
 import useGetContacts from "@/hooks/useGetContacts";
-import useThreadStore from "@/hooks/useThreadStore";
-import { MessageSquarePlus, Pencil, UserRound } from "lucide-react";
+import { MessageSquarePlus} from "lucide-react";
 import { useParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 
 const Home = () => {

@@ -12,14 +12,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Form } from "../ui/form";
 import { toast } from "sonner";
-import axios, { Axios } from "axios";
-import { Button } from "../ui/button";
+import axios from "axios";
 import FileUpload from "../Providers/Fileupload";
 import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "../ui/dropdown-menu";
 import useThreadStore from "@/hooks/useThreadStore";
 import useMessageReplyState from "@/hooks/uihooks/useReplyMessage";
-import { BrowserView, MobileView, isBrowser, isMobile } from 'react-device-detect';
 const formSchema = z.object({
   message: z.string().max(500,{ message: "Message input cannot exceed 500 characters." }),
 })

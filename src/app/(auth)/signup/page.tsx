@@ -1,9 +1,7 @@
 import { Authoptions } from "@/app/api/auth/[...nextauth]/option";
-import Login from "@/components/Form/Login";
 import Signup from "@/components/Form/Signup";
 import LogoComponent from "@/components/Header/Logo";
 import { getServerSession } from "next-auth";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 const page=async()=>{

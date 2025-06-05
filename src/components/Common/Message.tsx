@@ -29,7 +29,7 @@ const Message: React.FC<MessageProps> = ({ data, islast }) => {
 
   const mediaStyles = "rounded-xl object-cover max-w-full max-h-80 w-full h-auto";
 
-  const Content = ({ data }: { data: IMessageWithSenderAndSeen|null }) => {
+  const Content = ({ data }: { data: Partial<IMessageWithSenderAndSeen> | null }) => {
     if (!data) return null;
     console.log("Data in content", data);
     if (data.isGif && data?.isVideo) {

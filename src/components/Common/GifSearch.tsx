@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { DropdownMenu, DropdownMenuContent } from "../ui/dropdown-menu";
 import GifGrid from "./GifGrid";
 
 const GifSearch=()=>{

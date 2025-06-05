@@ -3,10 +3,8 @@ import { Button } from "../ui/button"
 import {
     Form,
     FormControl,
-    FormDescription,
     FormField,
     FormItem,
-    FormLabel,
     FormMessage,
   } from "@/components/ui/form"
   import { Input } from "../ui/input"
@@ -20,7 +18,6 @@ import GoogleButton from "@/assets/GoogleButton.png"
 import Google from "@/assets/Google.png"
 import Facebook from "@/assets/facebook.png"
 import Link from "next/link"
-import Signup from "./Signup"
 import { toast } from "sonner";
 import { signIn } from "next-auth/react"
 import { useState } from "react"

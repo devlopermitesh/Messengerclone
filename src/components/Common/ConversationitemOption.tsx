@@ -1,4 +1,4 @@
-import { Archive, Bell, BookmarkCheck, Ellipsis, SeparatorHorizontal, Trash2 } from "lucide-react"
+import { Archive, Bell, BookmarkCheck, Ellipsis, Trash2 } from "lucide-react"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { useEffect, useState } from "react";
 import { useDeleteChatmodel } from "@/hooks/uihooks/useDeleteChatmodel";

@@ -9,8 +9,8 @@ try {
    }
    
 
-} catch (error) {
-    return NextResponse.json({success:false,error:"Something went wrong"},{status:500})
+} catch (error:any) {
+    return NextResponse.json({success:false,error:error.message||"Something went wrong"},{status:500})
 }
 }
 

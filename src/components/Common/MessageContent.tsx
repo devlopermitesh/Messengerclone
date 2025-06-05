@@ -10,7 +10,6 @@ import { Columns2, Ellipsis, PanelLeftClose, Phone, User, Video } from "lucide-r
 import useThreadStore from "@/hooks/useThreadStore";
 import { useEffect, useMemo } from "react";
 import MessagesBox from "./MessagesBox";
-import useMessages from "@/hooks/useMessages";
 import useMenuStore from "@/hooks/uihooks/useMenustate";
 import { useSession } from "next-auth/react";
 import AcceptRequest from "./AcceptRequest";

@@ -1,9 +1,8 @@
 "use client";
 
-import React, { forwardRef, useState } from "react";
+import React, { forwardRef } from "react";
 import { IKUpload } from "imagekitio-next";
 import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props";
-import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 interface FileUploadProps {

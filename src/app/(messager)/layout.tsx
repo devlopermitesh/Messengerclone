@@ -2,7 +2,6 @@
 import Sidebar from "@/components/Common/Sidebar";
 import { getServerSession } from "next-auth";
 import { Authoptions } from "../api/auth/[...nextauth]/option";
-import { redirect } from "next/navigation";
 import Providers from "@/components/Providers/ImagekitProvider";
 import ModalProvider from "@/components/Providers/ModelProvider";
 const MessengerLayout = async({ children }: { children: React.ReactNode }) => {

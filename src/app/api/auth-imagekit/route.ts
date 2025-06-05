@@ -1,5 +1,4 @@
 import { NextResponse } from "next/server";
-import ImageKit from "imagekit";
 import { imagekit } from "@/lib/imagekit";
 
 

@@ -1,6 +1,5 @@
 import { Pin } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
-import { Button } from "../ui/button"
 import IconButton from "./IconButton"
 
 const MultiProfileOption=()=>{

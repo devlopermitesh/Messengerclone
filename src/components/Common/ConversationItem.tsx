@@ -4,13 +4,9 @@ import DefaultProfile from "@/assets/default.png"
 import React, { useMemo, useRef } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import useFilterOtherUser, { ChatListProps } from "@/hooks/usefilterOtherUser";
-import { Ellipsis, Menu } from "lucide-react";
 import ConversationItemOption from "./ConversationitemOption";
-import { useSession } from "next-auth/react";
 import useCurrentUser from "@/hooks/useCurrentUser";
-import { useParams } from "next/navigation";
 import { twMerge } from "tailwind-merge";
-import { Chat } from "@prisma/client";
 
 interface ConversationItemProps  {
   user:ChatListProps,

@@ -1,7 +1,6 @@
 import ServerAuth from "@/libserver/serverAuth"
 import { NextRequest, NextResponse } from "next/server"
 import prismadb from "@/libserver/prismadb"
-import { pusherserver } from "@/lib/pusher";
 export async function GET(req:NextRequest,context:{params:{requestId:string}}){
     try {
         const currentUser=await ServerAuth(req);

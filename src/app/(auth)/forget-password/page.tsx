@@ -1,8 +1,5 @@
 import ForgetPassword from "@/components/Form/forgetpassword";
-import Login from "@/components/Form/Login";
-import Signup from "@/components/Form/Signup";
 import LogoComponent from "@/components/Header/Logo";
-import Link from "next/link";
 
 const page=()=>{
 return(
