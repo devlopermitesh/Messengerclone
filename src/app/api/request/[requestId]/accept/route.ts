@@ -2,13 +2,16 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
-export async function POST(req:NextRequest,context:{params:{requestId:string}}){
+export async function POST(req:NextRequest,context:{params:Promise<{requestId:string}>}){
     try {
         const currentUser=await ServerAuth(req);
         if (!currentUser ||  typeof currentUser !== "object" || !("id" in currentUser)) {
             return NextResponse.json({ success: false, error: "Unauthorized request! Please try again later." }, { status: 401 });
         }
-        const {requestId}=(await context.params);
+        
+    const { params } = context;
+    const resolvedParams = await params;
+    const { requestId } = resolvedParams;
         const chatexits=await prismadb?.chat.update({where:{id:requestId},data:{
             isPending:false
         },

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb";
 import { pusherserver } from "@/lib/pusher";
 
-export async function POST(req: NextRequest, context: { params: { requestId: string } }) {
+export async function POST(req: NextRequest, context: { params: Promise<{ requestId: string }> }) {
   try {
     const currentUser = await ServerAuth(req);
 
@@ -12,7 +12,10 @@ export async function POST(req: NextRequest, context: { params: { requestId: str
       return NextResponse.json({ success: false, error: "Unauthorized request!" }, { status: 401 });
     }
 
-    const { requestId } = context.params;
+
+    const { params } = context;
+    const resolvedParams = await params;
+    const { requestId } = resolvedParams;
 
     // ✅ Update chat to hide for current user
     const chat = await prismadb.chat.update({

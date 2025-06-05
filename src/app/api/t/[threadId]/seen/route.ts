@@ -2,14 +2,16 @@ import ServerAuth from "@/libserver/serverAuth";
 import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb"
 import { pusherserver } from "@/lib/pusher";
-export async function POST(req:NextRequest,context: { params: { threadId: string } }){
+export async function POST(req:NextRequest,context: { params: Promise<{ threadId: string }> }){
     try {
         const currentUser=await ServerAuth(req);
          if (!currentUser || typeof currentUser !== "object" || !("id" in currentUser)) {
             return NextResponse.json({ success: false, error: "Unauthorized request! Please try again later." }, { status: 401 });
         }
         //is there  conversation Id
-        const { threadId } = (await context.params);
+   const { params } = context;
+    const resolvedParams = await params;
+    const { threadId } = resolvedParams;
         //find chat by threadID
         const Chat=await prismadb.chat.findUnique({where:{
             id:threadId

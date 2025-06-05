@@ -1,7 +1,7 @@
 import ServerAuth from "@/libserver/serverAuth"
 import { NextRequest, NextResponse } from "next/server"
 import prismadb from "@/libserver/prismadb"
-export async function GET(req:NextRequest,context:{params:{requestId:string}}){
+export async function GET(req:NextRequest,context:{params:Promise<{requestId:string}>}){
     try {
         const currentUser=await ServerAuth(req);
         if (!currentUser || typeof currentUser !== "object" || !("id" in currentUser)) {
