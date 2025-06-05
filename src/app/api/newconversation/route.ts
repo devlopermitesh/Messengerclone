@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import prismadb from "@/libserver/prismadb";
 import ServerAuth from "@/libserver/serverAuth";
 import { pusherserver } from "@/lib/pusher";
-import { User } from "@prisma/client";
+import type { User } from '@prisma/client';
+
 
 export async function POST(request: NextRequest) {
   try {
