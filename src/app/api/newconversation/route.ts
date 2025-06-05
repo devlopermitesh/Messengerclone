@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
             })
 // Notify all users about the new Requested Group
 await Promise.all(
-  newGroup.user.map((user) =>
+  newGroup.user.map((user:User) =>
     pusherserver.trigger(user.email!, "new:requestchat", newGroup)
   )
 );
