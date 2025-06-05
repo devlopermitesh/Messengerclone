@@ -25,4 +25,5 @@ class PassswordService {
   }
 }
 
-export default new PassswordService();
+const bcryptinstance=new PassswordService();
+export default bcryptinstance;

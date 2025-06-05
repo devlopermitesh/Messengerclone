@@ -18,7 +18,7 @@ return(
   Connect with your favourite people
 </h2>
 <Link href="signup" className="text-gray-600 hover:underline undeline-sky-500">
-Don't have a Account?<b className="text-sky-500"> create Now</b>
+Don&apos;t have a Account?<b className="text-sky-500"> create Now</b>
 </Link>
 <Login/>
 

@@ -10,4 +10,7 @@ class CryptoUtils {
   }
 }
 
-export default new CryptoUtils();
+
+
+const cryptoutils =new CryptoUtils();;
+export default cryptoutils;

@@ -94,5 +94,5 @@ await this.transporter.sendMail({
 
   }
 }
-
-export default new EmailService();
+const email= new EmailService();
+export default email;
